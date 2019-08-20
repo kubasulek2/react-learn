@@ -32,7 +32,16 @@
             2,
             "always"
 				],
-				"no-undef": 0
+				"no-undef": 0,
+				"react/no-unescaped-entities": [
+					"error",
+					{
+						"forbid": [
+							">",
+							"}"
+						]
+					}
+				]
 				
     }
 }
