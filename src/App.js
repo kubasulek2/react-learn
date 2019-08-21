@@ -35,16 +35,41 @@ class App extends Component {
 		this.setState({ showPersons: !this.state.showPersons });
 	}
 
+	deletePersonHandler = (personIndex) => {
+		//const persons = this.state.persons.slice(); //shallow copy
+		//const persons = [...this.state.persons];	//shallow copy, also for objects
+		//const persons = Array.from(this.state.persons); //shallow copy
+		const persons = JSON.parse(JSON.stringify(this.state.persons)); // deep copy also for objects
+		persons.splice(personIndex, 1);
+		this.setState({ persons: persons });
+	}
+
 	render() {
-		
+
 		const style = {
 			backgroundColor: 'indianred',
 			padding: '1rem',
 			color: 'white'
 		};
+		let persons = null;
 
-		let isVisible = this.state.showPersons? 'visible' : 'hidden';
-		
+		if (this.state.showPersons) {
+			persons = (
+				<div>
+					{this.state.persons.map((person, index) => {
+						return (
+							<Person
+								key={index + 1}
+								click={() => this.deletePersonHandler(index)}
+								name={person.name}
+								age={person.age}
+							/>
+						);
+					})}
+				</div>);
+		}
+
+
 
 		return (
 			<div className="App">
@@ -57,26 +82,8 @@ class App extends Component {
 				>
 					Switch Name
 				</button>
-				<div className={isVisible}>
-					<Person
-						name={this.state.persons[0].name}
-						age={this.state.persons[0].age}
-					/>
-					<Person
-						class='pointer'
-						name={this.state.persons[1].name}
-						age={this.state.persons[1].age}
-						change={this.nameChangedHandler}
-						click={() => this.switchNameHandler('Olo')}
-					/>
-					<Person
-						name={this.state.persons[2].name}
-						age={this.state.persons[2].age}
 
-					>
-						Hobby: Racing <br /> 1.2.3
-					</Person>
-				</div>
+				{persons}
 
 			</div>
 		);

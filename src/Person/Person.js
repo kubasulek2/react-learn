@@ -10,6 +10,7 @@ const person = (props) => {
 				{props.children}
 			</p>
 			<input type="text" onChange={props.change} placeholder={props.name}/>
+			<button onClick={props.click} >delete</button>
 		</div>
 	);
 };
