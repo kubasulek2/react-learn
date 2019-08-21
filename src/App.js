@@ -52,8 +52,8 @@ deletePersonHandler = (personIndex) => {
 
 render() {
 
-	const style = {
-		backgroundColor: 'indianred',
+	let style = {
+		backgroundColor: this.state.showPersons ? 'indianred' : 'dodgerblue',
 		padding: '1rem',
 		color: 'white'
 	};
