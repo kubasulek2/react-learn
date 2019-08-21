@@ -76,12 +76,16 @@ render() {
 			</div>);
 	}
 
-
-
+	let classes = [];
+	
+	if (this.state.persons.length <=2) classes.push('red');
+	if (this.state.persons.length <= 1) classes.push('bold');
+	classes = classes.join(' ');
+	
 	return (
 		<div className="App">
 			<h1>Hi,  I'm React App</h1>
-			<p>this is really working</p>
+			<p className={classes}>this is really working</p>
 
 			<button
 				style={style}
