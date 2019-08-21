@@ -20,7 +20,17 @@ class App extends Component {
 		});
 
 	}
-	
+	nameChangedHandler = (event) => {
+		this.setState({
+			persons: [
+				{ name: this.state.persons[0].name, age: this.state.persons[0].age },
+				{ name: event.target.value, age: this.state.persons[1].age },
+				{ name: this.state.persons[2].name, age: this.state.persons[2].age },
+
+			]
+		});
+	}
+
 	render() {
 		return (
 			<div className="App">
@@ -28,17 +38,19 @@ class App extends Component {
 				<p>this is really working</p>
 				<button onClick={this.switchNameHandler.bind(this, 'Max!!')}>Switch Name</button>  {/* one way of passing arguments, use array[] if more arguments */}
 				<Person
-					name={this.state.persons[0].name} 
+					name={this.state.persons[0].name}
 					age={this.state.persons[0].age}
 				/>
 				<Person
 					name={this.state.persons[1].name}
 					age={this.state.persons[1].age}
-					click={ ()=> this.switchNameHandler('Olo')} //another way of passing arguments
+					change={this.nameChangedHandler}
+					click={() => this.switchNameHandler('Olo')} //another way of passing arguments
 				/>
 				<Person
 					name={this.state.persons[2].name}
 					age={this.state.persons[2].age}
+				
 				>
 					Hobby: Racing <br /> 1.2.3
 				</Person>
