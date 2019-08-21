@@ -8,7 +8,9 @@ const app = props => {
 			{ name: 'Max', age: 28 },
 			{ name: 'Horse', age: 21 },
 			{ name: 'Boo', age: 2 },
-		]
+			
+		],
+		otherState: 'abc'
 	});
 
 	const switchNameHandler = () => {
@@ -17,7 +19,8 @@ const app = props => {
 				{ name: 'Maximilian', age: state.persons[0].age === 28 ? 12 : 28 },
 				{ name: 'Horse', age: 21 },
 				{ name: 'Boo', age: 12 },
-			]
+			],
+			otherState: state.otherState // must be here, because hooks not merging new state with old but overriding old one, or you can split your state by using useState multiple time
 		});
 
 	};
