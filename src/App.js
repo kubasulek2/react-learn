@@ -88,7 +88,7 @@ render() {
 				onClick={this.togglePersonsHandler}
 			>
 				Switch Name
-				</button>
+			</button>
 
 			{persons}
 
