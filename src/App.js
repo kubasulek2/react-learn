@@ -32,15 +32,19 @@ class App extends Component {
 		});
 	}
 	togglePersonsHandler = () => {
-		this.setState({showPersons: !this.state.showPersons});
+		this.setState({ showPersons: !this.state.showPersons });
 	}
 
 	render() {
+		
 		const style = {
 			backgroundColor: 'indianred',
 			padding: '1rem',
 			color: 'white'
 		};
+
+		let isVisible = this.state.showPersons? 'visible' : 'hidden';
+		
 
 		return (
 			<div className="App">
@@ -53,30 +57,26 @@ class App extends Component {
 				>
 					Switch Name
 				</button>
-				{ this.state.showPersons ?
-					<div>
-						<Person
-							name={this.state.persons[0].name}
-							age={this.state.persons[0].age}
-						/>
-						<Person
-							class='pointer'
-							name={this.state.persons[1].name}
-							age={this.state.persons[1].age}
-							change={this.nameChangedHandler}
-							click={() => this.switchNameHandler('Olo')}
-						/>
-						<Person
-							name={this.state.persons[2].name}
-							age={this.state.persons[2].age}
-		
-						>
-							Hobby: Racing <br /> 1.2.3
-						</Person>
-					</div>
-					
-					: null
-				}
+				<div className={isVisible}>
+					<Person
+						name={this.state.persons[0].name}
+						age={this.state.persons[0].age}
+					/>
+					<Person
+						class='pointer'
+						name={this.state.persons[1].name}
+						age={this.state.persons[1].age}
+						change={this.nameChangedHandler}
+						click={() => this.switchNameHandler('Olo')}
+					/>
+					<Person
+						name={this.state.persons[2].name}
+						age={this.state.persons[2].age}
+
+					>
+						Hobby: Racing <br /> 1.2.3
+					</Person>
+				</div>
 
 			</div>
 		);
