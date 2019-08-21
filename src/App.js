@@ -1,46 +1,51 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
 
-const app = props => {
-	const [state, setState] = useState({
+class App extends Component {
+	state = {
 		persons: [
 			{ name: 'Max', age: 28 },
 			{ name: 'Horse', age: 21 },
 			{ name: 'Boo', age: 2 },
-			
-		],
-		otherState: 'abc'
-	});
-
-	const switchNameHandler = () => {
-		setState({
+		]
+	}
+	switchNameHandler = (newName) => {
+		this.setState({
 			persons: [
-				{ name: 'Maximilian', age: state.persons[0].age === 28 ? 12 : 28 },
+				{ name: newName, age: this.state.persons[0].age === 28 ? 12 : 28 },
 				{ name: 'Horse', age: 21 },
 				{ name: 'Boo', age: 12 },
-			],
-			otherState: state.otherState // must be here, because hooks not merging new state with old but overriding old one, or you can split your state by using useState multiple time
+			]
 		});
 
-	};
-
+	}
 	
-	return (
-		<div className="App">
+	render() {
+		return (
+			<div className="App">
+				<h1>Hi,  I'm React App</h1>
+				<p>this is really working</p>
+				<button onClick={this.switchNameHandler.bind(this, 'Max!!')}>Switch Name</button>  {/* one way of passing arguments, use array[] if more arguments */}
+				<Person
+					name={this.state.persons[0].name} 
+					age={this.state.persons[0].age}
+				/>
+				<Person
+					name={this.state.persons[1].name}
+					age={this.state.persons[1].age}
+					click={ ()=> this.switchNameHandler('Olo')} //another way of passing arguments
+				/>
+				<Person
+					name={this.state.persons[2].name}
+					age={this.state.persons[2].age}
+				>
+					Hobby: Racing <br /> 1.2.3
+				</Person>
 
-			<h1>Hi,  I'm React App</h1>
-			<p>this is really working</p>
-			<button onClick={() => switchNameHandler()}>Switch Name</button>
-			<Person name={state.persons[0].name} age={state.persons[0].age} />
-			<Person name={state.persons[1].name} age={state.persons[1].age} />
-			<Person name={state.persons[2].name} age={state.persons[2].age}>Hobby: Racing</Person>
-				
-		</div>
-	);
-	
-};
+			</div>
+		);
+	}
+}
 
-export default app;
-
-
+export default App;
