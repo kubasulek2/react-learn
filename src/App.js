@@ -32,11 +32,23 @@ class App extends Component {
 	}
 
 	render() {
+		const style = {
+			backgroundColor: 'indianred',
+			padding: '1rem',
+			color: 'white'
+		};
+		
 		return (
 			<div className="App">
 				<h1>Hi,  I'm React App</h1>
 				<p>this is really working</p>
-				<button onClick={this.switchNameHandler.bind(this, 'Max!!')}>Switch Name</button>  {/* one way of passing arguments, use array[] if more arguments */}
+
+				<button
+					style={style}
+					onClick={this.switchNameHandler.bind(this, 'Max!!')}
+				>
+					Switch Name
+				</button>  {/* one way of passing arguments, use array[] if more arguments */}
 				<Person
 					name={this.state.persons[0].name}
 					age={this.state.persons[0].age}
@@ -50,7 +62,7 @@ class App extends Component {
 				<Person
 					name={this.state.persons[2].name}
 					age={this.state.persons[2].age}
-				
+
 				>
 					Hobby: Racing <br /> 1.2.3
 				</Person>
