@@ -1,10 +1,13 @@
 .Person {
-	width: 505;
+	width: 50%;
 	margin: auto;
-	background: #f0f0f0;
+	background: #6b5959;
 	box-shadow: 0 2px 3px #ccc;
 	padding: 1rem;
 	text-align: center;
 	margin: 1rem;
 	
+}
+.pointer{
+	cursor: pointer;
 }

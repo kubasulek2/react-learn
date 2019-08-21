@@ -8,7 +8,8 @@ class App extends Component {
 			{ name: 'Max', age: 28 },
 			{ name: 'Horse', age: 21 },
 			{ name: 'Boo', age: 2 },
-		]
+		],
+		showPersons: false
 	}
 	switchNameHandler = (newName) => {
 		this.setState({
@@ -30,6 +31,9 @@ class App extends Component {
 			]
 		});
 	}
+	togglePersonsHandler = () => {
+		this.setState({showPersons: !this.state.showPersons});
+	}
 
 	render() {
 		const style = {
@@ -37,7 +41,7 @@ class App extends Component {
 			padding: '1rem',
 			color: 'white'
 		};
-		
+
 		return (
 			<div className="App">
 				<h1>Hi,  I'm React App</h1>
@@ -45,27 +49,34 @@ class App extends Component {
 
 				<button
 					style={style}
-					onClick={this.switchNameHandler.bind(this, 'Max!!')}
+					onClick={this.togglePersonsHandler}
 				>
 					Switch Name
-				</button>  {/* one way of passing arguments, use array[] if more arguments */}
-				<Person
-					name={this.state.persons[0].name}
-					age={this.state.persons[0].age}
-				/>
-				<Person
-					name={this.state.persons[1].name}
-					age={this.state.persons[1].age}
-					change={this.nameChangedHandler}
-					click={() => this.switchNameHandler('Olo')} //another way of passing arguments
-				/>
-				<Person
-					name={this.state.persons[2].name}
-					age={this.state.persons[2].age}
-
-				>
-					Hobby: Racing <br /> 1.2.3
-				</Person>
+				</button>
+				{ this.state.showPersons ?
+					<div>
+						<Person
+							name={this.state.persons[0].name}
+							age={this.state.persons[0].age}
+						/>
+						<Person
+							class='pointer'
+							name={this.state.persons[1].name}
+							age={this.state.persons[1].age}
+							change={this.nameChangedHandler}
+							click={() => this.switchNameHandler('Olo')}
+						/>
+						<Person
+							name={this.state.persons[2].name}
+							age={this.state.persons[2].age}
+		
+						>
+							Hobby: Racing <br /> 1.2.3
+						</Person>
+					</div>
+					
+					: null
+				}
 
 			</div>
 		);

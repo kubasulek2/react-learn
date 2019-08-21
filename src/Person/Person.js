@@ -4,12 +4,12 @@ import './Person.css';
 const person = (props) => {
 
 	return (
-		<div className="Person">
-			<p onClick={props.click} className='person'>I'm a {props.name} and I'm {props.age} years old. </p>
+		<div className={props.class ? 'Person ' + props.class : 'Person'}>
+			<p onClick={props.click}>I'm a {props.name} and I'm {props.age} years old. </p>
 			<p>
 				{props.children}
 			</p>
-			<input type="text" onChange={props.change} value={props.name}/>
+			<input type="text" onChange={props.change} placeholder={props.name}/>
 		</div>
 	);
 };
