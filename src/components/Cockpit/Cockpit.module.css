@@ -1,0 +1,31 @@
+.red {
+  color: red;
+}
+.bold {
+  font-weight: bold;
+}
+
+.Cockpit > button{
+	padding: 1rem;
+	font-style: 1.2rem;
+	text-transform: uppercase;
+	border-radius: .4rem;
+	background: rgb(39, 219, 195);
+	color: white;
+	box-shadow: 0 5px 5px rgba(0, 0, 0, .3);
+	border: none;
+	cursor: pointer;
+	transition: .5s ease;
+
+}
+.Cockpit > button:active,
+.Cockpit > button:focus{
+	outline: none;
+	border: none;
+	box-shadow: 0 2px 2px rgba(0, 0, 0, .3);
+
+}
+
+.Cockpit button.red{
+	background: rgb(247, 85, 64)
+}

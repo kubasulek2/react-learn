@@ -4,19 +4,22 @@ import styles from './Cockpit.module.css';
 const Cockpit = props => {
 	
 	let classes = [];
+	let btnClass = '';
 
-	if (this.props.persons.length <= 2) classes.push(styles.red);
-	if (this.props.persons.length <= 1) classes.push(styles.bold);
 
+	if (props.persons.length <= 2) classes.push(styles.red);
+	if (props.persons.length <= 1) classes.push(styles.bold);
+	
+	if (props.showPerson) btnClass = styles.red; 
 	return (
-		<div>
+		<div className={styles.Cockpit}>
 			
 			<h1>Hi,  I'm React App</h1>
 			<p className={classes.join(' ')}>this is really working</p>
 
 			<button
 				className={btnClass}
-				onClick={this.togglePersonsHandler}
+				onClick={props.clicked}
 			>Switch Name</button>
 
 		</div>

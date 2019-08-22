@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styles from './App.module.css';
 import Persons from '../components/Persons/persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 
 class App extends Component {
@@ -51,7 +52,6 @@ class App extends Component {
 	render() {
 
 		let persons = null;
-		let btnClass = '';
 
 		if (this.state.showPersons) {
 			persons = (
@@ -64,12 +64,15 @@ class App extends Component {
 				</div>
 			);
 			
-			btnClass = styles.red;
+			
 		}
 
 		return (
 			<div className={styles.App}>
-				
+				<Cockpit
+					persons={this.state.persons}
+					showPerson={this.state.showPersons} 
+					clicked={this.togglePersonsHandler} />
 				{persons}
 
 			</div>
