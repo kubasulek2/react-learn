@@ -1,23 +1,30 @@
-import React from 'react';
+import React, {Component} from 'react';
 import Person from './Person/Person';
  
-const persons = props => (
-	props.persons.map((person, index) => {
+class Persons extends Component{ 
+
+	
+	shouldComponentUpdate(nextProps, nextState){
+
+		console.log(nextProps.persons, this.props.persons);
+		if (nextProps.persons !== this.props.person) return true;
+		else return false;
+	}
+	componentWillUnmount(){
+		console.log('Persons Will Unmount');
 		
-		if (props.showPerson) {
+	}
+	render(){
+		return this.props.persons.map((person, index) => (
+			<Person
+				key={person.id}
+				name={person.name}
+				age={person.age}
+				change={this.props.changed.bind(this, person.id)}
+				click={() => this.props.clicked(index)}
+			/>)
 			
-			return (
-				<Person
-					key={person.id}
-					name={person.name}
-					age={person.age}
-					change={props.changed.bind(this, person.id)}
-					click={() => props.clicked(index)}
-				/>
-			);
-		} else{
-			return null;
-		}
-	})
-);
-export default persons;
+		);
+	}
+}
+export default Persons;

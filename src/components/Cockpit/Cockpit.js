@@ -1,7 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './Cockpit.module.css';
 
 const Cockpit = props => {
+	
+	useEffect(() => {
+		
+		// Http request
+		setTimeout(() => {
+			console.log('data fetched');
+		}, 1000);
+
+		return () => {
+			console.log('Cockipt clean up work');
+		};
+	}, [props.persons]); // what need to change
+	
 	let classes = [];
 	let btnClass = '';
 

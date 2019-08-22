@@ -24,6 +24,7 @@ class App extends Component {
 		});
 
 	}
+
 	nameChangedHandler = (id, event) => {
 
 		const
@@ -50,6 +51,17 @@ class App extends Component {
 	}
 
 	render() {
+		let persons = null;
+		if (this.state.showPersons) {
+			persons = (
+				<Persons
+					persons={this.state.persons}
+					clicked={this.deletePersonHandler}
+					changed={this.nameChangedHandler}
+				/>
+			);
+		}
+
 		return (
 			<div className={styles.App}>
 				<Cockpit
@@ -57,14 +69,7 @@ class App extends Component {
 					persons={this.state.persons}
 					showPerson={this.state.showPersons} 
 					clicked={this.togglePersonsHandler} />
-				<div>
-					<Persons
-						persons={this.state.persons}
-						clicked={this.deletePersonHandler}
-						changed={this.nameChangedHandler}
-						showPerson={this.state.showPersons} 
-					/>
-				</div>
+				{persons}
 
 			</div>
 		);
