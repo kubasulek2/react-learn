@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styles from './App.module.css';
-import Person from './Person/Person';
-import ErrorBoundry from './ErrorBoundry/ErrorBoundry';
+import Persons from '../components/Persons/persons';
+
 
 class App extends Component {
 	state = {
@@ -56,42 +56,20 @@ class App extends Component {
 		if (this.state.showPersons) {
 			persons = (
 				<div>
-					{this.state.persons.map((person, index) => {
-						return (
-							<ErrorBoundry key={person.id}>
-								<Person
-									change={this.nameChangedHandler.bind(this, person.id)}
-									// key={person.id}
-									click={() => this.deletePersonHandler(index)}
-									name={person.name}
-									age={person.age}
-								/>
-							</ErrorBoundry>
-						);
-					})}
+					<Persons
+						persons={this.state.persons}
+						clicked={this.deletePersonHandler}
+						changed={this.nameChangedHandler}
+					/>
 				</div>
 			);
+			
 			btnClass = styles.red;
 		}
 
-		let classes = [];
-
-		if (this.state.persons.length <= 2) classes.push(styles.red);
-		if (this.state.persons.length <= 1) classes.push(styles.bold);
-
-
 		return (
 			<div className={styles.App}>
-				<h1>Hi,  I'm React App</h1>
-				<p className={classes.join(' ')}>this is really working</p>
-
-				<button
-					className={btnClass}
-					onClick={this.togglePersonsHandler}
-				>
-					Switch Name
-				</button>
-
+				
 				{persons}
 
 			</div>
