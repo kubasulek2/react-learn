@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import Radium from 'radium';
+import Radium, {StyleRoot} from 'radium';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -54,9 +54,13 @@ deletePersonHandler = (personIndex) => {
 render() {
 
 	let style = {
-		backgroundColor: this.state.showPersons ? 'indianred' : 'dodgerblue',
+		background: this.state.showPersons ? 'indianred' : 'dodgerblue',
 		padding: '1rem',
-		color: 'white'
+		color: 'white',
+		':hover':{
+			background: 'yellow',
+			color: 'black'
+		}
 	};
 	let persons = null;
 
@@ -74,9 +78,14 @@ render() {
 						/>
 					);
 				})}
-			</div>);
+			</div>
+		);
+		style[':hover'] = {
+			background: 'purple',
+			color: 'black'
+		};			
 	}
-
+	
 	let classes = [];
 	
 	if (this.state.persons.length <=2) classes.push('red');
@@ -84,22 +93,24 @@ render() {
 	classes = classes.join(' ');
 	
 	return (
-		<div className="App">
-			<h1>Hi,  I'm React App</h1>
-			<p className={classes}>this is really working</p>
-
-			<button
-				style={style}
-				onClick={this.togglePersonsHandler}
-			>
-				Switch Name
-			</button>
-
-			{persons}
-
-		</div>
+		<StyleRoot>
+			<div className="App">
+				<h1>Hi,  I'm React App</h1>
+				<p className={classes}>this is really working</p>
+	
+				<button
+					style={style}
+					onClick={this.togglePersonsHandler}
+				>
+					Switch Name
+				</button>
+	
+				{persons}
+	
+			</div>
+		</StyleRoot>
 	);
 }
 }
 
-export default App;
+export default Radium(App);
