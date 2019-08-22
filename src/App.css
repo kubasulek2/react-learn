@@ -1,15 +1,15 @@
 .App {
   text-align: center;
 }
-.visible{
-	display: block;
+.visible {
+  display: block;
 }
-.hidden{
-	display: none
+.hidden {
+  display: none;
 }
-.red{
-	color: red;
+.red {
+  color: red;
 }
-.bold{
-	font-weight: bold;
+.bold {
+  font-weight: bold;
 }
