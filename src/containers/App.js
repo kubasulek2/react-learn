@@ -5,13 +5,14 @@ import Cockpit from '../components/Cockpit/Cockpit';
 
 
 class App extends Component {
+	
 	state = {
 		persons: [
 			{ id: '1', name: 'Max', age: 28 },
 			{ id: '2', name: 'Horse', age: 21 },
 			{ id: '3', name: 'Boo', age: 2 },
 		],
-		showPersons: false
+		showPersons: false,
 	}
 	switchNameHandler = (newName) => {
 		this.setState({
@@ -35,7 +36,6 @@ class App extends Component {
 		const persons = [...this.state.persons];
 		persons[personIndex] = person;
 		this.setState({ persons: persons });
-		console.log(this.state);
 
 	}
 
@@ -50,30 +50,21 @@ class App extends Component {
 	}
 
 	render() {
-
-		let persons = null;
-
-		if (this.state.showPersons) {
-			persons = (
+		return (
+			<div className={styles.App}>
+				<Cockpit
+					title ={this.props.title}
+					persons={this.state.persons}
+					showPerson={this.state.showPersons} 
+					clicked={this.togglePersonsHandler} />
 				<div>
 					<Persons
 						persons={this.state.persons}
 						clicked={this.deletePersonHandler}
 						changed={this.nameChangedHandler}
+						showPerson={this.state.showPersons} 
 					/>
 				</div>
-			);
-			
-			
-		}
-
-		return (
-			<div className={styles.App}>
-				<Cockpit
-					persons={this.state.persons}
-					showPerson={this.state.showPersons} 
-					clicked={this.togglePersonsHandler} />
-				{persons}
 
 			</div>
 		);

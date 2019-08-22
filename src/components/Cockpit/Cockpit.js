@@ -2,19 +2,18 @@ import React from 'react';
 import styles from './Cockpit.module.css';
 
 const Cockpit = props => {
-	
 	let classes = [];
 	let btnClass = '';
 
 
 	if (props.persons.length <= 2) classes.push(styles.red);
 	if (props.persons.length <= 1) classes.push(styles.bold);
-	
-	if (props.showPerson) btnClass = styles.red; 
+
+	if (props.showPerson) btnClass = styles.red;
 	return (
 		<div className={styles.Cockpit}>
-			
-			<h1>Hi,  I'm React App</h1>
+
+			<h1>{props.title}</h1>
 			<p className={classes.join(' ')}>this is really working</p>
 
 			<button

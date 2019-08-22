@@ -27,7 +27,7 @@
 				2,
 				"tab"
 			],
-			"no-console": "off",
+			"no-console": 2,
 			"linebreak-style": [
 				"error",
 				"unix"

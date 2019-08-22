@@ -2,8 +2,7 @@ import React from 'react';
 import styles from './Person.module.css';
 
 const person = (props) => {
-
-
+	console.log('person')
 	return (
 		<div className={props.class ? styles.person + ' ' + props.class : styles.person} >
 			<p onClick={props.click}>I'm a {props.name} and I'm {props.age} years old. </p>
