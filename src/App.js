@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './App.css';
-import Radium, {StyleRoot} from 'radium';
+import styles from './App.module.css';
 import Person from './Person/Person';
+import ErrorBoundry from './ErrorBoundry/ErrorBoundry';
 
 class App extends Component {
 	state = {
@@ -23,94 +23,80 @@ class App extends Component {
 
 	}
 	nameChangedHandler = (id, event) => {
-		
-		const 
+
+		const
 			personIndex = this.state.persons.findIndex(person => person.id === id),
-			person = {...this.state.persons[personIndex]};
-		
-		
+			person = { ...this.state.persons[personIndex] };
+
+
 		person.name = event.target.value;
-		
+
 		const persons = [...this.state.persons];
 		persons[personIndex] = person;
 		this.setState({ persons: persons });
 		console.log(this.state);
-		
+
 	}
 
-togglePersonsHandler = () => {
-	this.setState({ showPersons: !this.state.showPersons });
-}
+	togglePersonsHandler = () => {
+		this.setState({ showPersons: !this.state.showPersons });
+	}
 
-deletePersonHandler = (personIndex) => {
-	//const persons = this.state.persons.slice(); //shallow copy
-	//const persons = [...this.state.persons];	//shallow copy, also for objects
-	//const persons = Array.from(this.state.persons); //shallow copy
-	const persons = JSON.parse(JSON.stringify(this.state.persons)); // deep copy also for objects
-	persons.splice(personIndex, 1);
-	this.setState({ persons: persons });
-}
+	deletePersonHandler = (personIndex) => {
+		const persons = JSON.parse(JSON.stringify(this.state.persons)); 
+		persons.splice(personIndex, 1);
+		this.setState({ persons: persons });
+	}
 
-render() {
+	render() {
 
-	let style = {
-		background: this.state.showPersons ? 'indianred' : 'dodgerblue',
-		padding: '1rem',
-		color: 'white',
-		':hover':{
-			background: 'yellow',
-			color: 'black'
+		let persons = null;
+		let btnClass = '';
+
+		if (this.state.showPersons) {
+			persons = (
+				<div>
+					{this.state.persons.map((person, index) => {
+						return (
+							<ErrorBoundry key={person.id}>
+								<Person
+									change={this.nameChangedHandler.bind(this, person.id)}
+									// key={person.id}
+									click={() => this.deletePersonHandler(index)}
+									name={person.name}
+									age={person.age}
+								/>
+							</ErrorBoundry>
+						);
+					})}
+				</div>
+			);
+			btnClass = styles.red;
 		}
-	};
-	let persons = null;
 
-	if (this.state.showPersons) {
-		persons = (
-			<div>
-				{this.state.persons.map((person, index) => {
-					return (
-						<Person
-							change={this.nameChangedHandler.bind(this, person.id)}
-							key={person.id}
-							click={() => this.deletePersonHandler(index)}
-							name={person.name}
-							age={person.age}
-						/>
-					);
-				})}
-			</div>
-		);
-		style[':hover'] = {
-			background: 'purple',
-			color: 'black'
-		};			
-	}
-	
-	let classes = [];
-	
-	if (this.state.persons.length <=2) classes.push('red');
-	if (this.state.persons.length <= 1) classes.push('bold');
-	classes = classes.join(' ');
-	
-	return (
-		<StyleRoot>
-			<div className="App">
+		let classes = [];
+
+		if (this.state.persons.length <= 2) classes.push(styles.red);
+		if (this.state.persons.length <= 1) classes.push(styles.bold);
+
+
+		return (
+			<div className={styles.App}>
 				<h1>Hi,  I'm React App</h1>
-				<p className={classes}>this is really working</p>
-	
+				<p className={classes.join(' ')}>this is really working</p>
+
 				<button
-					style={style}
+					className={btnClass}
 					onClick={this.togglePersonsHandler}
 				>
 					Switch Name
 				</button>
-	
+
 				{persons}
-	
+
 			</div>
-		</StyleRoot>
-	);
-}
+		);
+	}
 }
 
-export default Radium(App);
+export default App;

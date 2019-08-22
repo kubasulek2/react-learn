@@ -2,9 +2,9 @@
     "env": {
         "browser": true,
         "es6": true,
+				"node": true,
 				"jquery": true
-		},
-		
+    },
     "extends": [
 			"eslint:recommended",
 			"plugin:react/recommended"
@@ -12,38 +12,43 @@
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
-    },
-    "parserOptions": {
-				"ecmaVersion": 2018,
-				"sourceType": "module"
 		},
 		"parser": "babel-eslint",
+    "parserOptions": {  
+			"ecmaVersion": 2018,
+			"sourceType": "module"
+    },
+    "plugins": [
+        "react"
+    ],
     "rules": {
-				"react/prop-types": 0,
-				"indent": [2, "tab"],
-        "no-console": "off",
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "single"
-        ],
-        "semi": [
-            2,
-            "always"
-				],
-				"no-undef": 0,
-				"react/no-unescaped-entities": [
-					"error",
-					{
-						"forbid": [
-							">",
-							"}"
-						]
-					}
-				]
-				
+      "react/prop-types": 0,
+			"indent": [
+				2,
+				"tab"
+			],
+			"no-console": "off",
+			"linebreak-style": [
+				"error",
+				"unix"
+			],
+			"quotes": [
+				"error",
+				"single"
+			],
+			"semi": [
+				2,
+				"always"
+			],
+			"no-undef": 0,
+			"react/no-unescaped-entities": [
+				"error",
+				{
+					"forbid": [
+						">",
+						"}"
+					]
+				}
+			]
     }
 }
