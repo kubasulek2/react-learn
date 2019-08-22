@@ -3,12 +3,11 @@ import Person from './Person/Person';
  
 class Persons extends Component{ 
 
-	
+
 	shouldComponentUpdate(nextProps, nextState){
 
-		console.log(nextProps.persons, this.props.persons);
-		if (nextProps.persons !== this.props.person) return true;
-		else return false;
+		console.log(nextProps.persons !== this.props.persons);
+		return nextProps.persons !== this.props.person;
 	}
 	componentWillUnmount(){
 		console.log('Persons Will Unmount');
