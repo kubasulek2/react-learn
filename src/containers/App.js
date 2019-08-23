@@ -9,9 +9,9 @@ class App extends Component {
 
 	state = {
 		persons: [
-			{ id: '1', name: 'Max', age: 28 },
-			{ id: '2', name: 'Horse', age: 21 },
-			{ id: '3', name: 'Boo', age: 2 },
+			{ id: 1, name: 'Max', age: 28 },
+			{ id: 2, name: 'Horse', age: 21 },
+			{ id: 3, name: 'Boo', age: 2 },
 		],
 		showPersons: false,
 		showCockpit: true,
@@ -20,9 +20,9 @@ class App extends Component {
 	switchNameHandler = (newName) => {
 		this.setState({
 			persons: [
-				{ name: newName, age: this.state.persons[0].age === 28 ? 12 : 28 },
-				{ name: 'Horse', age: 21 },
-				{ name: 'Boo', age: 12 },
+				{ id: 1, name: newName, age: this.state.persons[0].age === 28 ? 12 : 28 },
+				{ id: 2, name: 'Horse', age: 21 },
+				{ id: 3, name: 'Boo', age: 12 },
 			]
 		});
 
@@ -68,6 +68,7 @@ class App extends Component {
 					persons={this.state.persons}
 					clicked={this.deletePersonHandler}
 					changed={this.nameChangedHandler}
+					swap={this.switchNameHandler.bind(this, 'BooStorm')}
 				/>
 			);
 		}
