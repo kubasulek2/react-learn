@@ -6,21 +6,25 @@ const Cockpit = props => {
 	useEffect(() => {
 		
 		// Http request
-		setTimeout(() => {
+		const timer = setTimeout(() => {
 			console.log('data fetched');
 		}, 1000);
 
 		return () => {
-			console.log('Cockipt clean up work');
+			clearTimeout(timer)
+			console.log('Cockipt clean up work: removed timer');
 		};
-	}, [props.persons]); // what need to change
+	}, []); // what need to change
 	
+	useEffect(() => {
+		console.log(' from cockpit');
+	})
 	let classes = [];
 	let btnClass = '';
 
 
-	if (props.persons.length <= 2) classes.push(styles.red);
-	if (props.persons.length <= 1) classes.push(styles.bold);
+	if (props.personsLength <= 2) classes.push(styles.red);
+	if (props.personsLength <= 1) classes.push(styles.bold);
 
 	if (props.showPerson) btnClass = styles.red;
 	return (
@@ -37,4 +41,4 @@ const Cockpit = props => {
 		</div>
 	);
 };
-export default Cockpit;
+export default React.memo(Cockpit);

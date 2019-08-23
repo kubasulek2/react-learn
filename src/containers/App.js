@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styles from './App.module.css';
 import Persons from '../components/Persons/persons';
 import Cockpit from '../components/Cockpit/Cockpit';
+import WithClass from '../HOC/WithClass';
 
 
 class App extends Component {
@@ -13,6 +14,7 @@ class App extends Component {
 			{ id: '3', name: 'Boo', age: 2 },
 		],
 		showPersons: false,
+		showCockpit: true,
 	}
 	switchNameHandler = (newName) => {
 		this.setState({
@@ -51,7 +53,7 @@ class App extends Component {
 	}
 
 	render() {
-		let persons = null;
+		let persons = null; 
 		if (this.state.showPersons) {
 			persons = (
 				<Persons
@@ -63,15 +65,16 @@ class App extends Component {
 		}
 
 		return (
-			<div className={styles.App}>
-				<Cockpit
+			<WithClass classes={styles.App}>
+				<button onClick={()=> this.setState({showCockpit: !this.state.showCockpit})}>Hide Cockpit</button>
+				{this.state.showCockpit ? <Cockpit
 					title ={this.props.title}
-					persons={this.state.persons}
+					personsLength={this.state.persons.length}
 					showPerson={this.state.showPersons} 
-					clicked={this.togglePersonsHandler} />
+					clicked={this.togglePersonsHandler} /> : null}
 				{persons}
 
-			</div>
+			</WithClass>
 		);
 	}
 }

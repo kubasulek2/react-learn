@@ -1,18 +1,24 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import Person from './Person/Person';
  
-class Persons extends Component{ 
+class Persons extends PureComponent{ 
 
 
-	shouldComponentUpdate(nextProps, nextState){
+	// shouldComponentUpdate(nextProps, nextState){
+	// 	console.log(nextProps=== this.props); // this is false even though in console looks the same
+		
+	// 	return nextProps.persons !== this.props.persons; // this is true
+	// }
 
-		console.log(nextProps.persons !== this.props.persons);
-		return nextProps.persons !== this.props.person;
-	}
+	
 	componentWillUnmount(){
 		console.log('Persons Will Unmount');
 		
 	}
+	componentDidUpdate(prevProps, prevState) {
+		console.log('Persons updated');
+	}
+	
 	render(){
 		return this.props.persons.map((person, index) => (
 			<Person
