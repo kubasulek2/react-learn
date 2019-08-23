@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styles from './Cockpit.module.css';
 
 const Cockpit = props => {
-	
+
+	const toggleButtonRef = useRef(null);
 	useEffect(() => {
+		toggleButtonRef.current.click();
 		
 		// Http request
 		const timer = setTimeout(() => {
@@ -11,14 +13,14 @@ const Cockpit = props => {
 		}, 1000);
 
 		return () => {
-			clearTimeout(timer)
+			clearTimeout(timer);
 			console.log('Cockipt clean up work: removed timer');
 		};
 	}, []); // what need to change
 	
 	useEffect(() => {
 		console.log(' from cockpit');
-	})
+	});
 	let classes = [];
 	let btnClass = '';
 
@@ -34,6 +36,7 @@ const Cockpit = props => {
 			<p className={classes.join(' ')}>this is really working</p>
 
 			<button
+				ref={toggleButtonRef}
 				className={btnClass}
 				onClick={props.clicked}
 			>Switch Name</button>
