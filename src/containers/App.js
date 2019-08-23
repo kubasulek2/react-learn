@@ -3,6 +3,7 @@ import styles from './App.module.css';
 import Persons from '../components/Persons/persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 import WithClass from '../HOC/WithClass';
+import AuthContext from '../context/auth-context';
 
 
 class App extends Component {
@@ -15,7 +16,8 @@ class App extends Component {
 		],
 		showPersons: false,
 		showCockpit: true,
-		nameChangeCounter: 0
+		nameChangeCounter: 0,
+		authenticated: false
 	}
 	switchNameHandler = (newName) => {
 		this.setState({
@@ -26,6 +28,13 @@ class App extends Component {
 			]
 		});
 
+	}
+	logInHandler = () => {
+		console.log('logging');
+		setTimeout(() => {
+			console.log('logged');
+			this.setState({ authenticated: true });
+		}, 1000);
 	}
 
 	nameChangedHandler = (id, event) => {
@@ -76,13 +85,24 @@ class App extends Component {
 		return (
 			<WithClass classes={styles.App}>
 				<button onClick={() => this.setState({ showCockpit: !this.state.showCockpit })}>Hide Cockpit</button>
-				{this.state.showCockpit ? <Cockpit
-					title={this.props.title}
-					personsLength={this.state.persons.length}
-					showPerson={this.state.showPersons}
-					clicked={this.togglePersonsHandler} /> : null}
-				{persons}
 
+				<AuthContext.Provider value={{
+					authenticated: this.state.authenticated,
+					login: this.logInHandler
+				}}>
+
+					{
+						this.state.showCockpit ? <Cockpit
+							title={this.props.title}
+							personsLength={this.state.persons.length}
+							showPerson={this.state.showPersons}
+							clicked={this.togglePersonsHandler}
+						/> : null
+					}
+
+					{persons}
+
+				</AuthContext.Provider>
 			</WithClass>
 		);
 	}
