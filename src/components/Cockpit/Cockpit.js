@@ -1,13 +1,15 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useContext } from 'react';
 import styles from './Cockpit.module.css';
 import AuthContext from '../../context/auth-context';
 
 const Cockpit = props => {
 
 	const toggleButtonRef = useRef(null); // null is important
+	const authContext = useContext(AuthContext);
+
 	useEffect(() => {
 		toggleButtonRef.current.click();
-		
+
 		// Http request
 		const timer = setTimeout(() => {
 			console.log('data fetched');
@@ -18,7 +20,7 @@ const Cockpit = props => {
 			console.log('Cockipt clean up work: removed timer');
 		};
 	}, []); // what need to change
-	
+
 	useEffect(() => {
 		console.log(' from cockpit');
 	});
@@ -41,11 +43,7 @@ const Cockpit = props => {
 				className={btnClass}
 				onClick={props.clicked}
 			>Switch Name</button>
-			<AuthContext.Consumer>
-				{(context) => <button onClick={context.login}>Log in</button> }
-			</AuthContext.Consumer>
-			
-
+			<button onClick={authContext.login}>Log in</button>
 		</div>
 	);
 };
