@@ -6,7 +6,7 @@ import WithClass from '../HOC/WithClass';
 
 
 class App extends Component {
-	
+
 	state = {
 		persons: [
 			{ id: '1', name: 'Max', age: 28 },
@@ -15,6 +15,7 @@ class App extends Component {
 		],
 		showPersons: false,
 		showCockpit: true,
+		nameChangeCounter: 0
 	}
 	switchNameHandler = (newName) => {
 		this.setState({
@@ -38,7 +39,14 @@ class App extends Component {
 
 		const persons = [...this.state.persons];
 		persons[personIndex] = person;
-		this.setState({ persons: persons });
+		this.setState((prevState, props) => {
+			return {
+				persons: persons,
+				nameChangeCounter: prevState.nameChangeCounter + 1
+			};
+		});
+		console.log(this.state.nameChangeCounter);
+
 
 	}
 
@@ -47,13 +55,13 @@ class App extends Component {
 	}
 
 	deletePersonHandler = (personIndex) => {
-		const persons = JSON.parse(JSON.stringify(this.state.persons)); 
+		const persons = JSON.parse(JSON.stringify(this.state.persons));
 		persons.splice(personIndex, 1);
 		this.setState({ persons: persons });
 	}
 
 	render() {
-		let persons = null; 
+		let persons = null;
 		if (this.state.showPersons) {
 			persons = (
 				<Persons
@@ -66,11 +74,11 @@ class App extends Component {
 
 		return (
 			<WithClass classes={styles.App}>
-				<button onClick={()=> this.setState({showCockpit: !this.state.showCockpit})}>Hide Cockpit</button>
+				<button onClick={() => this.setState({ showCockpit: !this.state.showCockpit })}>Hide Cockpit</button>
 				{this.state.showCockpit ? <Cockpit
-					title ={this.props.title}
+					title={this.props.title}
 					personsLength={this.state.persons.length}
-					showPerson={this.state.showPersons} 
+					showPerson={this.state.showPersons}
 					clicked={this.togglePersonsHandler} /> : null}
 				{persons}
 

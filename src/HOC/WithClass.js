@@ -2,7 +2,7 @@ import React from 'react';
 
 //first way
 
-const withClass = props =>(
+const WithClass = props =>(
 	<div className={props.classes}>
 		{props.children}
 	</div>
@@ -11,13 +11,15 @@ const withClass = props =>(
 
 // second Way
 
-/* const withClass2 = (WrappedComponent, className) => {
+export const withClass2 = (WrappedComponent, className) => {
 	return props =>(
 		<div className={className}>
-			<WrappedComponent />
+			<WrappedComponent {...props}/>
 		</div>
 	);
-} */
+}
+
+
 
 
 // use like this:  
@@ -26,4 +28,4 @@ const withClass = props =>(
 
 // wrap your component export with function. should also name this file with lowercase char (to distinguish it from functional component) and name import with lowercase
 
-export default withClass;
+export default WithClass;
